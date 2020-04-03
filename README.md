@@ -1,8 +1,8 @@
 ### This is my JS 30 Project
 
-Please see all the challenges I have been up to day by day!
+For anyone that is interested here is the link: https://javascript30.com/
 
-Each day includes
+Each day includes:
 
 - The code I wrote
 - Notes I have made in the code on things I have learned.

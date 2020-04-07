@@ -1,4 +1,4 @@
-### My JS 30 Project
+# My JS 30 Project
 
 Each day includes:
 

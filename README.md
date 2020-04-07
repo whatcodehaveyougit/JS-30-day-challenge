@@ -1,6 +1,6 @@
 ### This is my JS 30 Project
 
-The link to the 30 day JS challenge I am doing: https://javascript30.com/
+Link to the 30 day JS challenge I am doing: https://javascript30.com/
 
 Each day includes:
 

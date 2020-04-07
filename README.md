@@ -2,8 +2,8 @@
 
 Each day includes:
 
-- The code I wrote
-- Notes I have made in the code on things I have learned.
-- The README, thus will explain the challenges I faced, how I solved them and what I learned :)
+- My Code!
+- Comments in the code to explain my logic.
+- A README to discuss the challenges I faced, my solutions and what I learned :)
 
  https://javascript30.com/

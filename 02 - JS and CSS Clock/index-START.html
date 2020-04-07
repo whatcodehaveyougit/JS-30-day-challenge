@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: 0.5s;
+      transition-timing-function: ease;
+      transition-timing-function: cubic-bezier(.42,0,1,2.16);
+}
+
+.hand.hour-hand {
+  width: 35%;
+  left: 14%;
+}
+
+
+  </style>
+
+  <script>
+
+  // This code that he wrote is commented out because when any hand reaches 11.59 instead of flipping clockwise to 12 it goes anticlockwise all the way back to 12.
+  // Because... in the transform: rotate()  CSS if the number is going up then it moves clockwise, number going down it goes anti clockwise.
+  // See my code below in how to refactor and fix this problem!
+
+
+  //
+  // function setDate(){
+  //   const now = new Date();
+  //   const seconds = now.getSeconds();
+  //   const degrees = (seconds * 6) + 90;
+  //
+  //   const secondHand = document.getElementsByClassName('second-hand')[0];
+  //   secondHand.style.transform = `rotate(${degrees}deg)`;
+  //
+  //   const mins = now.getMinutes();
+  //   const minutesAsDegrees = ((mins / 60) * 360) + 90;
+  //   const minuteHand = document.getElementsByClassName('min-hand')[0];
+  //   minuteHand.style.transform = `rotate(${minutesAsDegrees}deg)`;
+  //
+  //   const hours = now.getHours();
+  //   // console.log(hours)
+  //   const hoursAsDegrees = ((hours / 12) * 360) + 90;
+  //   const hourHand = document.getElementsByClassName('hour-hand')[0];
+  //   hourHand.style.transform = `rotate(${hoursAsDegrees}deg)`;
+  //
+  // }
+  //
+  // setInterval(setDate, 1000);
+
+
+// When page loads I grab the current time date and set these immediatly using the following functions:
+// setSeconds() etc
+
+
+  window.onload = function(){
+    const now = new Date();
+    seconds = now.getSeconds();
+    minutes = now.getMinutes();
+    hours = now.getHours();
+    setSeconds(seconds)
+    setMinutes(minutes)
+    setHours(hours)
+  };
+
+  function setSeconds(seconds){
+    const degrees = (seconds * 6) + 90;
+    let secondHand = document.getElementsByClassName('second-hand')[0];
+    secondHand.style.transform = `rotate(${degrees}deg)`;
+  }
+
+  function setMinutes(minutes){
+    const degrees = (minutes * 6) + 90;
+    const minuteHand = document.getElementsByClassName('min-hand')[0];
+    minuteHand.style.transform = `rotate(${degrees}deg)`;
+  }
+
+  function setHours(hours){
+    const degrees = ((hours / 12) * 360) + 90;
+    const hourHand = document.getElementsByClassName('hour-hand')[0];
+    hourHand.style.transform = `rotate(${degrees}deg)`;
+  }
+
+// After the current time has been set I simply want to keep updating the hands every, second / minute / hour
+// These function are called every second / min / hour and move the clock arm over by one 'degree'
+// This means that the clock doesn't actually 'know' the time, it knew it when the page first loaded.
+// Now it simply updates it at the required intervals so that it remains correct
+
+// Importantly the hands always travel clockwise because the value of the transform: rotate simply increase.
+//  This means that the clock hands will always travel clockwise!
+
+function updateSeconds(){
+  seconds++;
+  const degrees = (seconds * 6) + 90;
+  // console.log(seconds)
+  let secondHand = document.getElementsByClassName('second-hand')[0];
+  secondHand.style.transform = `rotate(${degrees}deg)`;
+}
+
+function updateMinutes(){
+  minutes++;
+  const degrees = (minutes * 6) + 90;
+  const minuteHand = document.getElementsByClassName('min-hand')[0];
+  minuteHand.style.transform = `rotate(${minutesAsDegrees}deg)`;
+}
+
+function updateHours(){
+  hours++;
+  const hoursAsDegrees = ((hours / 12) * 360) + 90;
+  const hourHand = document.getElementsByClassName('hour-hand')[0];
+  hourHand.style.transform = `rotate(${hoursAsDegrees}deg)`;
+}
+
+setInterval(updateSeconds, 1000);
+setInterval(updateMinutes, 60000)
+setInterval(updateHours, 360000)
+
+
+  </script>
+</body>
+</html>

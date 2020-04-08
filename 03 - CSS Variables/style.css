@@ -1,0 +1,46 @@
+
+html {
+  font-family: avenir;
+  padding:20px;
+}
+
+:root {
+  --main-bg-color: #e4e5ec;
+  --box-padding: 20px;
+  --main-heading: center;
+  --section-title: 40px;
+  --section-title-align: center;
+}
+
+
+.title > div {
+  /* It is white if the --color is not yet defined */
+  background-color: var(--color, white);
+  font-size: 50px;
+  display: inline;
+  position: relative;
+  top:var(--new-position, 0px);
+  transition: top ease 1.5s;
+}
+
+.title > div:hover {
+  background-color: var(--color);
+  top: var(--new-position);
+}
+
+
+.title {
+  font-size: var(--section-title);
+  text-align: var(--section-title-align);
+  padding-top: 20px;
+}
+
+.box {
+  height: 100px;
+  padding: var(--box-padding);
+  background-color: var(--main-bg-color);
+}
+
+h1 {
+  text-align: var(--main-heading);
+}

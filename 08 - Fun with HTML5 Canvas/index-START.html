@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script
+
+<!-- Grabbing element using querySelector -->
+	const canvas = document.querySelector('#draw')
+
+  // It will be 800 by 800
+  const ctx = canvas.getContext('2d')
+
+// Will now scale to the window
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerWidth
+  ctx.strokeStyle = '#BADA55'
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round"
+
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  hue = 0;
+  ctx.lineWidth = 30;
+  let direction = true;
+
+  function draw(e){
+    if(!isDrawing) return;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+
+    // Cool trick!
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+    hue++;
+
+    // Really great bit of code!
+    if (ctx.lineWidth >= 50 || ctx.lineWidth <= 1){
+      direction = !direction
+    }
+
+    if(direction){
+      ctx.lineWidth++;
+    } else {
+      ctx.lineWidth--;
+    }
+    console.log(ctx.lineWidth )
+  }
+
+  canvas.addEventListener('mousemove', draw)
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  });
+  canvas.addEventListener('mouseup', () => isDrawing = false)
+  canvas.addEventListener('mouseout', () => isDrawing = false)
+
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>

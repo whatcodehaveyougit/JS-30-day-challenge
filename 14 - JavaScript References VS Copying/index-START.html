@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+    // name = "Sig"
+    // name2 = name
+    // console.log(name, name2);
+    // name = "Watt"
+    // console.log(name, name2);
+    // THis 2nd console is Watt Sig as this all happens synchronously
+
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    const team = players
+    // This here edits both teams and players
+    // team[3] = "Lux"
+    // Reason for this, team is NOT an Array
+    // Team is simply a reference to the players Array
+    // So having changed team it will go and change players as well
+    // console.log(players);
+    // Will include Lux ^^
+
+
+    // How to get around this ?
+    // We use slice() to make a copy of the array and then we can edit it without affecting the original one
+
+    // Afew ways to make a copy - slice with nothing in it.  Returns the entire array.
+    // Normally with the 2 parameters it slices the array up and returns you the chunk
+
+    // const team2 = players.slice()
+    // team2[2] = "lux"
+    // console.log(players);
+
+    // BEST SOLUTION
+    // A nicer way to do this is not using slice, but using Spread !
+
+    // const team3 = [...players];
+    // const team4 = Array.from(players) <--- Also a very nice way
+
+    // team3[2] = "Lux"
+    // console.log(players);
+    // console.log(team3);
+
+
+    // With an Object
+    // and we want to make a copy of it.
+
+    const person = {
+      name: "Sigurd",
+      age: 26
+    }
+
+    const captain = person
+    // captain.number = 23;
+    // console.log(person);
+
+    // How to make a copy of an Object ?
+    // parameters = empty Object, the object that will be the template, anything I want to add or overwrite
+    const cap2 = Object.assign({}, person, { number: 99, age: 12 })
+    console.log(person);
+    console.log(cap2
+
+
+    // NB - OBJECT.assign only does it one level deep
+    // If you want to clone and entire object then you need to go online and get a function to do that
+
+
+    // this does it..
+    // Known as the ['poor mans deep clone']
+    const dev2 = JSON.parse(JSON.stringify(wes));
+    // So you stringify it but then immediatly parse it back into an object. Haha!
+
+
+    // Another way to do this is using the Spread operator - oNLY IN REACT!
+    // We spread out the object into a new object, then can add stuff like this
+
+    // cap3 = {...person }
+
+    // We have not made a copy as this log shows that number has been added to person and not just captain
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+  </script>
+
+</body>
+</html>

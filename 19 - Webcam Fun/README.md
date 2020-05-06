@@ -10,3 +10,18 @@ A new event listener which I had never seen before.
 video.addEventListener('canplay', paintToCanvas )
 
 Getting a photo of the video stream and piping that into an <img /> element was a very interesting process.  Commented each step to explain what was happening, pretty cool!
+
+
+When uploading this to git I forgot to gitignore the node_modules, classic!
+
+To fix I did:
+
+git push -f origin last_known_good_commit:branch_name
+This pushed my last known good commit to remote
+
+Then I cleared my local commits
+git reset --hard origin/master
+
+Completely, reset!
+
+Now I just re added the folder with the gitignore of course.  
